@@ -10,15 +10,17 @@ export default function Countries(props) {
 
     const { countries, activities } = useSelector((state) => state);
 
-    const [ currentPage, setCurrentPage ] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const [ countriesPerPage ] = useState(10);
+    const [countriesPerPage] = useState(10);
 
-    const [ searchActivity, setSearchActivity ] = useState('');
+    const [searchActivity, setSearchActivity] = useState('');
 
-    const [ searchTerm, setSearchTerm ] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
 
     const dispatch = useDispatch();
+
+    // USEEFECTS ///////////////////////////////////////////////////////
 
     useEffect(() => {
 
@@ -38,6 +40,16 @@ export default function Countries(props) {
 
     }
 
+    // VARIABLES //////////////////////////////////////////////////////
+
+    let currentCountry = [];
+
+    let indexOfFirstCountry = 0;
+
+    let indexOfLastCountry = 0;
+
+    let filterActivity = [];
+
     let size = 10;
 
     let totalPages = Math.ceil(countries.length / size);
@@ -49,6 +61,8 @@ export default function Countries(props) {
         buttons.push(i);
 
     }
+
+    // HANDLECHANGES //////////////////////////////////////////////////////
 
     function handleChangeActivity(e) {
 
@@ -63,15 +77,13 @@ export default function Countries(props) {
 
         });
 
+        setCurrentPage(1);
+
     }
 
-    const getFilteredCountries = (searchTerm, countries) => {
+    // FUNCIONES FILTRO //////////////////////////////////////////////////////
 
-        if (!searchTerm) {
-
-            return countries;
-
-        }
+    function getFilteredCountries(searchTerm, countries) {
 
         let transformToLowerCase = searchTerm.toLowerCase();
 
@@ -111,15 +123,9 @@ export default function Countries(props) {
 
     }
 
-    const getFilteredActivities = (searchActivity, countries) => {
+    function getFilteredActivities(searchActivity) {
 
-        if (!searchActivity) {
-
-            return countries;
-
-        }
-
-        filterActivity = activities.filter((activity) => activity.id === searchActivity.searchActivity)
+        filterActivity = activities.filter((activity) => activity.id === searchActivity.searchActivity);
 
         currentCountry = filterActivity[0].countries;
 
@@ -157,13 +163,21 @@ export default function Countries(props) {
 
     }
 
-    let currentCountry = [];
+    // CONDICIONES //////////////////////////////////////////////////////
 
-    let indexOfFirstCountry = 0;
+    if (currentPage === 1) {
 
-    let indexOfLastCountry = 0;
+        currentCountry = countries.slice(0, 9);
 
-    let filterActivity = [];
+    } else {
+
+        indexOfLastCountry = currentPage * countriesPerPage;
+
+        indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
+
+        currentCountry = countries.slice(indexOfFirstCountry - 1, indexOfLastCountry - 1);
+
+    }
 
     if (searchTerm) {
 
@@ -171,7 +185,7 @@ export default function Countries(props) {
 
     } else if (currentPage === 1) {
 
-        currentCountry = countries.slice(0, 9);
+        currentCountry = currentCountry.slice(0, 9);
 
     } else {
 
@@ -183,13 +197,13 @@ export default function Countries(props) {
 
     }
 
-    if(searchActivity) {
+    if (searchActivity) {
 
-        currentCountry = getFilteredActivities(searchActivity, countries)
+        currentCountry = getFilteredActivities(searchActivity)
 
     } else if (currentPage === 1) {
 
-        currentCountry = countries.slice(0, 9);
+        currentCountry = currentCountry.slice(0, 9);
 
     } else {
 
@@ -201,13 +215,25 @@ export default function Countries(props) {
 
     }
 
+    // PAGINADO //////////////////////////////////////////////////////
+
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    // RENDERIZADO //////////////////////////////////////////////////////
 
     return (
 
         <main>
 
-            <input type="text" placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)} />
+            <input type="text" placeholder="Search..."
+                onChange={(e) => {
+
+                    setSearchTerm(e.target.value)
+                    setCurrentPage(e.target = 1)
+
+                }}
+
+            />
 
             <Link to="/api/countries/AtoZ">
                 <button>Sort from A to Z</button>

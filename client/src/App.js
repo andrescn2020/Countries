@@ -11,7 +11,6 @@ import FilterAtoZ from "./components/Filters/FilterAtoZ";
 import FilterHighPop from "./components/Filters/FilterHighPop";
 import FilterLowPop from "./components/Filters/FilterLowPop";
 import FilterOceania from "./components/Filters/FilterOceania";
-import FilterTurismActivity from "./components/Filters/FilterTurismActivity";
 import FilterZtoA from "./components/Filters/FilterZtoA";
 import Activity from "./components/Form/Activity";
 import Home from "./components/Home/Home";
@@ -37,7 +36,6 @@ function App() {
         <Route path="/api/countries/FilterHighPop" exact component={FilterHighPop} />
         <Route path="/api/countries/FilterLowPop" exact component={FilterLowPop} />
         <Route path="/api/activity/" exact component={Activity} />
-        <Route path="/api/activity/details" exact component={FilterTurismActivity} />
         <Route path="/api/countries/:id" exact component={CountryDetailById} />
         {/* <Route path="*" component={NotFound} /> */}
 

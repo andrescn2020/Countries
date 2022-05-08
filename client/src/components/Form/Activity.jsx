@@ -95,7 +95,7 @@ export default function Activity() {
 
             errors.name = 'Activity is required';
 
-        } else if (!/([A-Z])/gi.test(input.name) || /[0-9]/.test(input.name) || /\W/.test(input.name)) {
+        } else if (/[^\x20\x2D0-9A-Z\x5Fa-z\xC0-\xD6\xD8-\xF6\xF8-\xFF]/g.test(input.name)) {
 
             errors.name = 'Activity name is incorrect (Only can contains letters)';
 
@@ -187,9 +187,17 @@ export default function Activity() {
 
     if (deleteCountry) {
 
-        input.country = input.country.filter((e) => e !== deleteCountry)
+        if(input.country.length === 0) {
 
-    }
+            error.country = "Country is required"
+
+        } else {
+
+            input.country = input.country.filter((e) => e !== deleteCountry);
+
+        }
+
+    } 
 
     async function handleSubmit(e) {
 
@@ -251,7 +259,7 @@ export default function Activity() {
 
                     <select name="difficult" value={input.difficult} onChange={handleChange}>
 
-                        <option value="Sin Especificar" >Unspecified</option>
+                        <option value="Unspecified" >Unspecified</option>
                         <option value="1 - Very Easy">1 - Very Easy</option>
                         <option value="2 - Easy">2 - Easy</option>
                         <option value="3 - Intermediate">3 - Intermediate</option>
@@ -268,7 +276,7 @@ export default function Activity() {
 
                     <select name="duration" value={input.duration} onChange={handleChange}>
 
-                        <option value="Sin Especificar" >Unspecified</option>
+                        <option value="Unspecified" >Unspecified</option>
                         <option value="1 Hour" >1 Hour</option>
                         <option value="2 Hours">2 Hours</option>
                         <option value="3 Hours">3 Hours</option>
@@ -298,7 +306,7 @@ export default function Activity() {
 
                     <label>Country: </label>
 
-                    <select name="country" value={input.country} onChange={handleChangeCountry}>
+                    <select name="country" value={``} onChange={handleChangeCountry}>
 
                         <option value="Select">---------------</option>
 

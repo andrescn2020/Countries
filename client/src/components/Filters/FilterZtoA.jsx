@@ -10,13 +10,13 @@ export default function FilterZtoA(props) {
 
     const { countries, activities } = useSelector((state) => state);
 
-    const [ currentPage, setCurrentPage ] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const [ countriesPerPage ] = useState(10);
+    const [countriesPerPage] = useState(10);
 
-    const [ searchActivity, setSearchActivity ] = useState('');
+    const [searchActivity, setSearchActivity] = useState('');
 
-    const [ searchTerm, setSearchTerm ] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
 
     const dispatch = useDispatch();
 
@@ -62,6 +62,8 @@ export default function FilterZtoA(props) {
             return newState;
 
         });
+
+        setCurrentPage(1);
 
     }
 
@@ -165,11 +167,7 @@ export default function FilterZtoA(props) {
 
     let filterActivity = [];
 
-    if (searchTerm) {
-
-        currentCountry = getFilteredCountries(searchTerm, countries);
-
-    } else if (currentPage === 1) {
+    if (currentPage === 1) {
 
         currentCountry = countries.slice(0, 9);
 
@@ -183,13 +181,31 @@ export default function FilterZtoA(props) {
 
     }
 
-    if(searchActivity) {
+    if (searchTerm) {
 
-        currentCountry = getFilteredActivities(searchActivity, countries)
+        currentCountry = getFilteredCountries(searchTerm, countries);
 
     } else if (currentPage === 1) {
 
-        currentCountry = countries.slice(0, 9);
+        currentCountry = currentCountry.slice(0, 9);
+
+    } else {
+
+        indexOfLastCountry = currentPage * countriesPerPage;
+
+        indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
+
+        currentCountry = countries.slice(indexOfFirstCountry - 1, indexOfLastCountry - 1);
+
+    }
+
+    if (searchActivity) {
+
+        currentCountry = getFilteredActivities(searchActivity)
+
+    } else if (currentPage === 1) {
+
+        currentCountry = currentCountry.slice(0, 9);
 
     } else {
 
@@ -207,7 +223,12 @@ export default function FilterZtoA(props) {
 
         <main>
 
-            <input type="text" placeholder="Search..." onChange={(e) => setSearchTerm(e.target.value)} />
+            <input type="text" placeholder="Search..." onChange={(e) => {
+
+                setSearchTerm(e.target.value)
+                setCurrentPage(e.target = 1)
+
+            }} />
 
             <Link to="/api/countries/AtoZ">
                 <button>Sort from A to Z</button>
