@@ -230,6 +230,10 @@ export default function FilterAfrica(props) {
 
             }} />
 
+            <Link to="/api/countries/">
+                <button>Home</button>
+            </Link>
+
             <Link to="/api/countries/AtoZ">
                 <button>Sort from A to Z</button>
             </Link>
@@ -290,17 +294,17 @@ export default function FilterAfrica(props) {
 
             </div>
 
-            <div>{currentCountry.length === 0 
-            ? "There are no countries in Africa with this activity" 
-            : currentCountry.map((country) => (
+            <div>{currentCountry.length === 0
+                ? "There are no countries in Africa with this activity"
+                : currentCountry.map((country) => (
 
-                <Country
-                    key={country.id}
-                    country={country}
-                    navigate={handleNavigate}
-                />
+                    <Country
+                        key={country.id}
+                        country={country}
+                        navigate={handleNavigate}
+                    />
 
-            ))}</div>
+                ))}</div>
 
         </main>
 

@@ -1,16 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import "./Home.css"
 
 export default function Home(){
 
   return (
+
       <div>
-    <h1>PI Countries</h1>
-    <h3>Countries</h3>
+    <h1>Welcome</h1>
+    <aside className='exploreContainer'>
     <Link to = "api/countries/">
-      Explore
+      <span className='exploreLink'>Explore</span>
     </Link>
+    </aside>
     </div>
+    
       )
 
 }

@@ -1,0 +1,56 @@
+h1 {
+
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgba(240, 248, 255, 0.668);
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 4rem;
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+body {
+
+    background-image: url("../../imgs/Fondo3.jpg");
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    text-decoration: none;
+    text-decoration-line: none;
+
+}
+
+.exploreContainer {
+
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 650px;
+
+}
+
+.exploreLink {
+
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgba(240, 248, 255, 0.668);
+    text-decoration: none;
+    text-decoration-line: none;
+    font-size: 3rem;
+    cursor: pointer;
+
+}
+
+.exploreLink:visited, .exploreLink:hover, .exploreLink:active, .exploreLink:link {
+
+    color: #000000;
+    text-decoration: none;
+
+
+}

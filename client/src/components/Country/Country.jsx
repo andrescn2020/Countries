@@ -1,3 +1,5 @@
+import "./Country.css"
+
 export default function Country(props){
 
   const { country, navigate } = props;
@@ -5,11 +7,10 @@ export default function Country(props){
   const { id, name , img, continent } = country;
   
   return (
-    <div>
-      <h1>{name}</h1>
-      <img src={img} alt=""/>
-      <p>{continent}</p>
-      <button onClick={() => navigate(id)}>Details</button> 
+    <div className="countryContainer" onClick={() => navigate(id)}>
+      <h1 className="countryName">{name}</h1>
+      <img className="countryImg" src={img} alt=""/>
+      <p className="countryContinent">{continent}</p>
     </div>
   );
 };

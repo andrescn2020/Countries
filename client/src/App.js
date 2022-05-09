@@ -14,6 +14,7 @@ import FilterOceania from "./components/Filters/FilterOceania";
 import FilterZtoA from "./components/Filters/FilterZtoA";
 import Activity from "./components/Form/Activity";
 import Home from "./components/Home/Home";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
 
@@ -37,7 +38,7 @@ function App() {
         <Route path="/api/countries/FilterLowPop" exact component={FilterLowPop} />
         <Route path="/api/activity/" exact component={Activity} />
         <Route path="/api/countries/:id" exact component={CountryDetailById} />
-        {/* <Route path="*" component={NotFound} /> */}
+        <Route path="*" exact={true} component={NotFound} />
 
       </Switch>
 
