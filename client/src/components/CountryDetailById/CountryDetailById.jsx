@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './CountryDetailById.css';
+import { Link } from "react-router-dom";
 
 export default function CountryDetailById() {
 
@@ -22,37 +23,34 @@ export default function CountryDetailById() {
     return (
 
         <div>
+
+        <div className="homeButton">
+            <Link to="/api/countries/">
+            <button>Home</button>
+            </Link>
+        </div>
+
+        <div className="infoContainer">
             {country && (
                 <>
-                <img src={country.img} alt="" style={{width: "200px", height: "100px" }}/>
-                <div>
-                    <label>Name:  </label>
-                    <span>{country.name}</span>
-                </div>
-                <div>
-                    <label>Continent:  </label>
-                    <span>{country.continent}</span>
-                </div>
-                <div>
-                    <label>Capital:  </label>
-                    <span>{country.capital}</span>
-                </div>
-                <div>
-                    <label>Subregion:  </label>
-                    <span>{country.subregion}</span>
-                </div>
-                <div>
-                    <label>Area:  </label>
-                    <span>{country.area} Km2</span>
-                </div>
-                <div>
-                    <label>Population:  </label>
-                    <span>{country.population}</span>
-                </div>
-                {<div>
-                    <label>Tourist Activities:  </label><br></br>
+                <img className="countryImg" src={country.img} alt="" style={{"width" : "250px", "height": "300px", "objectFit":"contain", "margin-bottom": "-50px"}}/>
+
+                    <label>Name: {country.name}</label>
+
+                    <label>Continent: {country.continent}</label>
+
+                    <label>Capital: {country.capital}</label>
+
+                    <label>Subregion: {country.subregion}</label>
+
+                    <label>Area: {country.area} Km2</label>
+
+                    <label>Population: {country.population}</label>
+
+                {<div className="activityContainer">
+                    <label>Tourist Activities:  </label>
                     {country.turismActivities.length === 0 
-                    ? "This country doesn´t have any activity" 
+                    ? <span>This country doesn´t have any activity</span>
                     : country.turismActivities.map((activity) => (
 
                         <span>{`Activity Name: "${activity.name}" ||  
@@ -64,6 +62,7 @@ export default function CountryDetailById() {
                 </div>}
                 </>
             )}
+        </div>
         </div>
 
     )

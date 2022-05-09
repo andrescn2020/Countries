@@ -1,3 +1,51 @@
-span {
+.infoContainer {
+
     display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 2rem;
+    padding: 0;
+    font-weight: 700;
+
+}
+
+label {
+
+    color: rgb(227, 219, 219);
+    margin-top: 20px;
+
+}
+
+.homeButton {
+
+    margin-top: 20px;
+    margin-left: 20px;
+
+}
+
+.countryImg {
+
+    object-fit: contain;
+    padding: 0;
+
+} 
+
+span {
+
+    color: rgb(227, 219, 219);
+
+}
+
+.activityContainer {
+
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+
 }

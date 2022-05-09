@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import '../Form/Activity.css';
 import { getAllCountries } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function Activity() {
 
@@ -187,7 +188,7 @@ export default function Activity() {
 
     if (deleteCountry) {
 
-        if(input.country.length === 0) {
+        if (input.country.length === 0) {
 
             error.country = "Country is required"
 
@@ -197,7 +198,7 @@ export default function Activity() {
 
         }
 
-    } 
+    }
 
     async function handleSubmit(e) {
 
@@ -235,11 +236,17 @@ export default function Activity() {
 
         <div>
 
-            <p>asd</p>
+            <div className="homeButton">
+                <Link to="/api/countries/">
+                    <button>Home</button>
+                </Link>
+            </div>
+
+            <h1>Create your activity</h1>
 
             <form onSubmit={handleSubmit}>
 
-                <div>
+                <div className="inputName">
 
                     <label>Activity Name: </label>
 
@@ -249,7 +256,7 @@ export default function Activity() {
                         value={input.name}
                         onChange={handleChange}
                         className={error?.name && "danger"}
-                    /> {error.name && <span>{error.name}</span>}
+                    /> <br></br> {error.name && <span>{error.name}</span>}
 
                 </div>
 
@@ -298,7 +305,7 @@ export default function Activity() {
                         <option value="Summer" >Summer</option>
                         <option value="Winter" >Winter</option>
 
-                    </select> {error.season && <span>{error.season}</span>}
+                    </select> <br></br> {error.season && <span>{error.season}</span>}
 
                 </div>
 
@@ -320,6 +327,8 @@ export default function Activity() {
 
                     </select>
 
+                    <br></br>
+
                     {error.country && <span>{error.country}</span>}
 
                     {input.country.map((country) => (
@@ -332,7 +341,7 @@ export default function Activity() {
 
                 <div>
 
-                    <input type="submit" disabled={disabled} value="Create Acitivity" />
+                    <input className="createActivity" type="submit" disabled={disabled} value="Create Activity" />
 
                 </div>
 

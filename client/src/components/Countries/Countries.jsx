@@ -284,11 +284,11 @@ export default function Countries(props) {
 
             <select className="activityBar" name="searchActivity" value={searchActivity} onChange={handleChangeActivity}>
 
-                <option>Search by Tourist Activity</option>
+                <option className="options">Search by Tourist Activity</option>
 
                 {activities.map((activity) => (
 
-                    <option key={activity.id} value={activity.id}>{activity.name}</option>
+                    <option className="options" key={activity.id} value={activity.id}>{activity.name}</option>
 
                 ))}
 
