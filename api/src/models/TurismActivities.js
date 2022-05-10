@@ -16,19 +16,19 @@ module.exports = (sequelize) => {
       unique: true
     },
     difficult: {
-        type: DataTypes.ENUM((["1 - Very Easy", "2 - Easy", "3 - Intermediate", "4 - Hard", "5 - Very Hard", "Sin Especificar", ""])),
+        type: DataTypes.ENUM((["1 - Very Easy", "2 - Easy", "3 - Intermediate", "4 - Hard", "5 - Very Hard", "Unspecified", ""])),
     },
     duration: {
-        type: DataTypes.ENUM((["1 Hour", "2 Hours", "3 Hours", "4 Hours", "More than 5 Hours", "Sin Especificar", ""])),
+        type: DataTypes.ENUM((["1 Hour", "2 Hours", "3 Hours", "4 Hours", "More than 5 Hours", "Unspecified", ""])),
     },
     season: {
         type: DataTypes.ENUM(["Summer", "Autumn", "Winter","Spring"]),
         allowNull: false
     },
     country: {
-      type: DataTypes.ARRAY(DataTypes.JSON),
+      allowNull: false,
       defaultValue: [],
-      allowNull: false
+      type: DataTypes.ARRAY(DataTypes.JSON),
     }
   });
 };

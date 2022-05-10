@@ -8,11 +8,19 @@ router.post("/", async (req, res, next) => {
 
         const { name, difficult, duration, season, country } = req.body;
 
-        const newActivity = await TurismActivities.create(req.body);
+        if(country === "[]"){
 
-        await newActivity.addCountries(country);
-        
-        return res.status(201).json(newActivity);  
+            return res.status(404).json(`El pais no debe ser null`);
+
+        } else {
+
+            const newActivity = await TurismActivities.create(req.body);
+
+            await newActivity.addCountries(country);
+            
+            return res.status(201).json(newActivity);  
+
+        }
         
     } catch (err) {
 
