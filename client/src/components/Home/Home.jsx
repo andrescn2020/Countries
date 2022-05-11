@@ -9,8 +9,8 @@ export default function Home(){
       <div>
     <h1>Welcome</h1>
     <aside className='exploreContainer'>
-    <Link to = "api/countries/">
-      <span className='exploreLink'>Explore</span>
+    <Link style={{"textDecoration": "none"}} to = "api/countries/">
+      <button className='exploreLink'>Explore</button>
     </Link>
     </aside>
     </div>

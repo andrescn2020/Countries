@@ -69,12 +69,6 @@ export default function FilterLowPop(props) {
 
     const getFilteredCountries = (searchTerm, countries) => {
 
-        if (!searchTerm) {
-
-            return countries;
-
-        }
-
         let transformToLowerCase = searchTerm.toLowerCase();
 
         let filteredCountries = countries.filter((country) => country.name.toLowerCase().includes(transformToLowerCase));
@@ -113,11 +107,23 @@ export default function FilterLowPop(props) {
 
     }
 
-    const getFilteredActivities = (searchActivity, countries) => {
+    const getFilteredActivities = (searchActivity) => {
 
-        if (!searchActivity) {
+        if (searchActivity.searchActivity === 'removeFilter') {
 
-            return countries;
+            if (currentPage === 1) {
+
+                return currentCountry = countries.slice(0, 9)
+
+            } else {
+
+                indexOfLastCountry = currentPage * countriesPerPage;
+
+                indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
+
+                return countries.slice(indexOfFirstCountry - 1, indexOfLastCountry - 1);
+
+            }
 
         }
 
@@ -199,7 +205,26 @@ export default function FilterLowPop(props) {
 
     }
 
-    if (searchActivity) {
+    if (searchTerm && searchActivity.searchActivity === "removeFilter") {
+
+        currentCountry = getFilteredCountries(searchTerm, countries);
+
+    } else if (currentPage === 1) {
+
+        currentCountry = currentCountry.slice(0, 9);
+
+    } else {
+
+        indexOfLastCountry = currentPage * countriesPerPage;
+
+        indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
+
+        currentCountry = countries.slice(indexOfFirstCountry - 1, indexOfLastCountry - 1);
+
+    }
+
+
+    if (searchActivity && !searchTerm) {
 
         currentCountry = getFilteredActivities(searchActivity)
 
@@ -223,12 +248,11 @@ export default function FilterLowPop(props) {
 
         <main>
 
-            <input type="text" placeholder="Search..." onChange={(e) => {
+            <div className="filterCointainers">
 
-                setSearchTerm(e.target.value)
-                setCurrentPage(e.target = 1)
-
-            }} />
+            <Link to="/api/countries/">
+                <button>Home</button>
+            </Link>
 
             <Link to="/api/countries/AtoZ">
                 <button>Sort from A to Z</button>
@@ -259,46 +283,66 @@ export default function FilterLowPop(props) {
             </Link>
 
             <Link to="/api/countries/FilterHighPop">
-                <button>Sort by highest population</button>
+                <button>Highest population</button>
             </Link>
 
             <Link to="/api/countries/FilterLowPop">
-                <button>Sort by lowest population</button>
+                <button>Lowest population</button>
             </Link>
 
             <Link to="/api/activity/">
                 <button>Create Tourist Activity</button>
             </Link>
 
-            <select name="searchActivity" value={searchActivity} onChange={handleChangeActivity}>
+            </div>
 
-                <option>Search by Tourist Activity</option>
+            <div className="buttonsContainer">
+
+                {buttons.map((number) => (
+                    <button className="buttons" onClick={() => paginate(number)} key={number}>{number}</button>
+                ))}
+
+            </div>
+
+            <select className="activityBar" name="searchActivity" value={searchActivity} onChange={handleChangeActivity}>
+
+                <option className="options">Search by Tourist Activity</option>
+
+                <option className="options" value="removeFilter">Remove Filter</option>
 
                 {activities.map((activity) => (
 
-                    <option key={activity.id} value={activity.id}>{activity.name}</option>
+                    <option className="options" key={activity.id} value={activity.id}>{activity.name}</option>
 
                 ))}
 
             </select>
 
-            <div>
+            <input className="searchBar" type="text" placeholder="Search..."
+                onChange={(e) => {
 
-                {buttons.map((number) => (
-                    <button onClick={() => paginate(number)} key={number}>{number}</button>
+                    setSearchTerm(e.target.value)
+                    setCurrentPage(e.target = 1)
+
+                }}
+
+            />
+
+            <div className="countriesContainer">
+
+                {currentCountry.map((country) => (
+
+                    <Country
+                        key={country.id}
+                        country={country}
+                        navigate={handleNavigate}
+                    />
+
                 ))}
 
             </div>
 
-            {currentCountry.map((country) => (
 
-                <Country
-                    key={country.id}
-                    country={country}
-                    navigate={handleNavigate}
-                />
-
-            ))}
 
         </main>
 

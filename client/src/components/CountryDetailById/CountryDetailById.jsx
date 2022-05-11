@@ -50,13 +50,13 @@ export default function CountryDetailById() {
                 {<div className="activityContainer">
                     <label>Tourist Activities:  </label>
                     {country.turismActivities.length === 0 
-                    ? <span>This country doesn´t have any activity</span>
+                    ? <p>This country doesn´t have any activity</p>
                     : country.turismActivities.map((activity) => (
 
-                        <span>{`Activity Name: "${activity.name}" ||  
+                        <p>{`Activity Name: "${activity.name}" ||  
                         Activity Duration: "${activity.duration}" ||    
                         Activity Difficult: "${activity.difficult}" ||   
-                        Activity Season: "${activity.season}".`}</span>
+                        Activity Season: "${activity.season}".`}</p>
 
                     ))}
                 </div>}

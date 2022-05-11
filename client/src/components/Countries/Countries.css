@@ -22,7 +22,7 @@
 
 .buttons {
 
-    background: #5a2a0677;
+    background: #5a2a0673;
     height: 30px;
     line-height: 30px;
     color: rgb(227, 219, 219);
@@ -42,7 +42,7 @@
     align-items: center;
     margin-right: 5px;
     margin-top: 10px;
-    margin-bottom: -30px;
+    margin-bottom: -38px;
 
 }
 
@@ -116,10 +116,6 @@ button {
     
 }
 
-/* .options {
-
-    color: rgb(227, 219, 219);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    background-color: red;
-
-} */
+a:link{
+    text-decoration: none!important;
+  }

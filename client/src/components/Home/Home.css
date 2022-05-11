@@ -25,7 +25,6 @@ body {
 
 .exploreContainer {
 
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     -webkit-box-pack: center;
@@ -33,6 +32,7 @@ body {
     -webkit-box-align: center;
     align-items: center;
     margin-top: 650px;
+    text-decoration: none;
 
 }
 
@@ -40,8 +40,11 @@ body {
 
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: rgba(240, 248, 255, 0.668);
+    width: 200px;
+    height: 100px;
     text-decoration: none;
     text-decoration-line: none;
+    background-color: rgba(165, 42, 42, 0);
     font-size: 3rem;
     cursor: pointer;
 
@@ -49,7 +52,7 @@ body {
 
 .exploreLink:visited, .exploreLink:hover, .exploreLink:active, .exploreLink:link {
 
-    color: #000000;
+    color: #937777;
     text-decoration: none;
 
 

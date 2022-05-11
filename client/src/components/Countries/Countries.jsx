@@ -126,6 +126,28 @@ export default function Countries(props) {
 
     function getFilteredActivities(searchActivity) {
 
+        if (searchActivity.searchActivity === 'removeFilter') {
+
+            if (currentPage === 1) {
+
+                console.log(countries);
+
+                return currentCountry = countries.slice(0, 9)
+
+            } else {
+
+                console.log(countries);
+
+                indexOfLastCountry = currentPage * countriesPerPage;
+
+                indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
+
+                return countries.slice(indexOfFirstCountry - 1, indexOfLastCountry - 1);
+
+            }
+
+        }
+
         filterActivity = activities.filter((activity) => activity.id === searchActivity.searchActivity);
 
         currentCountry = filterActivity[0].countries;
@@ -150,9 +172,13 @@ export default function Countries(props) {
 
         if (currentPage === 1) {
 
+            console.log(countries);
+
             return currentCountry.slice(0, 9);
 
         } else {
+
+            console.log(countries);
 
             indexOfLastCountry = currentPage * countriesPerPage;
 
@@ -198,7 +224,26 @@ export default function Countries(props) {
 
     }
 
-    if (searchActivity) {
+
+    if (searchTerm && searchActivity.searchActivity === "removeFilter") {
+
+        currentCountry = getFilteredCountries(searchTerm, countries);
+
+    } else if (currentPage === 1) {
+
+        currentCountry = currentCountry.slice(0, 9);
+
+    } else {
+
+        indexOfLastCountry = currentPage * countriesPerPage;
+
+        indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
+
+        currentCountry = countries.slice(indexOfFirstCountry - 1, indexOfLastCountry - 1);
+
+    }
+
+    if (searchActivity && !searchTerm) {
 
         currentCountry = getFilteredActivities(searchActivity)
 
@@ -216,6 +261,25 @@ export default function Countries(props) {
 
     }
 
+
+    // if (searchActivity && searchTerm) {
+
+    //     currentCountry = getFilteredCountries(searchTerm, countries)
+
+    // } else if (currentPage === 1) {
+
+    //     currentCountry = currentCountry.slice(0, 9);
+
+    // } else {
+
+    //     indexOfLastCountry = currentPage * countriesPerPage;
+
+    //     indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
+
+    //     currentCountry = countries.slice(indexOfFirstCountry - 1, indexOfLastCountry - 1);
+
+    // }
+
     // PAGINADO //////////////////////////////////////////////////////
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -228,49 +292,49 @@ export default function Countries(props) {
 
             <div className="filterCointainers">
 
-            <Link to="/api/countries/">
-                <button>Home</button>
-            </Link>
+                <Link underline="none" to="/api/countries/">
+                    <button>Home</button>
+                </Link>
 
-            <Link to="/api/countries/AtoZ">
-                <button>Sort from A to Z</button>
-            </Link>
+                <Link to="/api/countries/AtoZ">
+                    <button>Sort from A to Z</button>
+                </Link>
 
-            <Link to="/api/countries/ZtoA">
-                <button>Sort from Z to A</button>
-            </Link>
+                <Link to="/api/countries/ZtoA">
+                    <button>Sort from Z to A</button>
+                </Link>
 
-            <Link to="/api/countries/FilterAfrica">
-                <button>Africa Countries</button>
-            </Link>
+                <Link to="/api/countries/FilterAfrica">
+                    <button>Africa Countries</button>
+                </Link>
 
-            <Link to="/api/countries/FilterAmerica">
-                <button>America Countries</button>
-            </Link>
+                <Link to="/api/countries/FilterAmerica">
+                    <button>America Countries</button>
+                </Link>
 
-            <Link to="/api/countries/FilterAntartida">
-                <button>Antarctic Countries</button>
-            </Link>
+                <Link to="/api/countries/FilterAntartida">
+                    <button>Antarctic Countries</button>
+                </Link>
 
-            <Link to="/api/countries/FilterAsia">
-                <button>Asia Countries</button>
-            </Link>
+                <Link to="/api/countries/FilterAsia">
+                    <button>Asia Countries</button>
+                </Link>
 
-            <Link to="/api/countries/FilterOceania">
-                <button>Oceania Countries</button>
-            </Link>
+                <Link to="/api/countries/FilterOceania">
+                    <button>Oceania Countries</button>
+                </Link>
 
-            <Link to="/api/countries/FilterHighPop">
-                <button>Highest population</button>
-            </Link>
+                <Link to="/api/countries/FilterHighPop">
+                    <button>Highest population</button>
+                </Link>
 
-            <Link to="/api/countries/FilterLowPop">
-                <button>Lowest population</button>
-            </Link>
+                <Link to="/api/countries/FilterLowPop">
+                    <button>Lowest population</button>
+                </Link>
 
-            <Link to="/api/activity/">
-                <button>Create Tourist Activity</button>
-            </Link>
+                 <Link to="/api/activity/"> 
+                    <button>Create Tourist Activity</button>
+                 </Link> 
 
             </div>
 
@@ -286,11 +350,16 @@ export default function Countries(props) {
 
                 <option className="options">Search by Tourist Activity</option>
 
+                <option className="options" value="removeFilter">Remove Filter</option>
+
+
                 {activities.map((activity) => (
 
                     <option className="options" key={activity.id} value={activity.id}>{activity.name}</option>
 
                 ))}
+
+
 
             </select>
 

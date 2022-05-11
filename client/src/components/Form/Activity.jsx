@@ -88,6 +88,61 @@ export default function Activity() {
 
     }
 
+
+    function handleChangeCountry(e) {
+
+        if (e.target.value === "Select" || e.target.name === []) {
+
+            setInput((prevState) => {
+
+
+                const newState = {
+                    ...prevState,
+                    [e.target.name]: [...input.country]
+                };
+
+                setError(validate(newState));
+
+                return newState;
+
+            });
+
+        } else if (input.country.includes(e.target.value)) {
+
+            setInput((prevState) => {
+
+
+                const newState = {
+                    ...prevState,
+                    [e.target.name]: [...input.country]
+                };
+
+                setError(validate(newState));
+
+                return newState;
+
+            });
+
+
+        } else {
+
+            setInput((prevState) => {
+
+                const newState = {
+                    ...prevState,
+                    [e.target.name]: [...input.country, e.target.value]
+                };
+
+                setError(validate(newState));
+
+                return newState;
+
+            });
+
+        }
+
+    }
+
     function validate(input) {
 
         const errors = {};
@@ -96,9 +151,9 @@ export default function Activity() {
 
             errors.name = 'Activity is required';
 
-        } else if (/[^\x20\x2D0-9A-Z\x5Fa-z\xC0-\xD6\xD8-\xF6\xF8-\xFF]/g.test(input.name)) {
+        } else if (/[^\x20\x2DA-Z\x5Fa-z\xC0-\xD6\xD8-\xF6\xF8-\xFF]/g.test(input.name)) {
 
-            errors.name = 'Activity name is incorrect (Only can contains letters)';
+            errors.name = 'Name incorrect (Only can contains letters)';
 
         } else if (input.name.length >= 20) {
 
@@ -130,61 +185,6 @@ export default function Activity() {
 
     }
 
-    function handleChangeCountry(e) {
-
-        if (e.target.value === "Select" || e.target.name === []) {
-
-            setInput((prevState) => {
-
-
-                const newState = {
-                    ...prevState,
-                    [e.target.name]: [...input.country]
-                };
-
-                setError(validate(newState));
-
-                return newState;
-
-            });
-
-        }
-        else if (input.country.includes(e.target.value)) {
-
-            setInput((prevState) => {
-
-
-                const newState = {
-                    ...prevState,
-                    [e.target.name]: [...input.country]
-                };
-
-                setError(validate(newState));
-
-                return newState;
-
-            });
-
-
-        } else {
-
-            setInput((prevState) => {
-
-
-                const newState = {
-                    ...prevState,
-                    [e.target.name]: [...input.country, e.target.value]
-                };
-
-                setError(validate(newState));
-
-                return newState;
-
-            });
-
-        }
-
-    }
 
     if (deleteCountry) {
 
@@ -197,6 +197,8 @@ export default function Activity() {
             input.country = input.country.filter((e) => e !== deleteCountry);
 
         }
+
+        setDeleteCountry("")
 
     }
 
@@ -331,11 +333,15 @@ export default function Activity() {
 
                     {error.country && <span>{error.country}</span>}
 
-                    {input.country.map((country) => (
+                    <div className="countriesSelection">
 
-                        <button onClick={(e) => setDeleteCountry(e.target.value)} key={country} value={country}>{country} </button>
+                        {input.country.map((country) => (
 
-                    ))}
+                            <button style={{ "width": "50px", "height": "50px", "marginTop": "5px" }} onClick={(e) => setDeleteCountry(e.target.value)} key={country} value={country}>{country} </button>
+
+                        ))}
+
+                    </div>
 
                 </div>
 

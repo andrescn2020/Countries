@@ -1,6 +1,15 @@
 span {
-    color: rgb(255, 0, 0);
+
+    color: rgb(255, 255, 255);
     font-weight: 700;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: rgba(255, 0, 0, 0.668);
+    margin-top: 10px;
+    margin-bottom: 10px;
+
 }
 
 div {
@@ -64,5 +73,12 @@ select {
     box-shadow: 1px 1px 20px 0 #000000;
     text-shadow: 1px 1px 20px #000000;
 
+
+}
+
+.countriesSelection {
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
 
 }
