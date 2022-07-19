@@ -20,6 +20,7 @@
 const server = require('./src/app.js');
 const { conn, Countries } = require('./src/db.js');
 const axios= require('axios');
+const PORT = process.env.PORT || 3001;
 
 // --------------------------------------------------------------------------------------------------------------
 // RECORDAR EL ENCODING DE POSTGRES PARA QUE TOME LOS PAISES
@@ -65,7 +66,7 @@ conn.sync({force: true}).then(() => {
   loadApi();
  
 
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+  server.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
   });
 });
